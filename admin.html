@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ciwrote | Writing Desk</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+
+<body>
+
+
+<header class="admin-header">
+
+
+    <div>
+
+        <h1>
+
+            ciwrote
+
+        </h1>
+
+        <p>
+
+            Writing Desk
+
+        </p>
+
+    </div>
+
+
+    <button id="logoutBtn">
+
+        Logout
+
+    </button>
+
+
+</header>
+
+
+
+<main class="admin-container">
+
+
+
+<section class="editor">
+
+
+
+    <h2>
+
+        Write a Piece
+
+    </h2>
+
+
+
+    <input
+
+        type="text"
+
+        id="title"
+
+        placeholder="Title of your piece"
+
+    >
+
+
+
+    <select id="category">
+
+
+        <option value="Poem">
+
+            Poem
+
+        </option>
+
+
+        <option value="Letter">
+
+            Letter
+
+        </option>
+
+
+        <option value="Essay">
+
+            Essay
+
+        </option>
+
+
+        <option value="Thought">
+
+            Thought
+
+        </option>
+
+
+    </select>
+
+
+
+
+    <textarea
+
+        id="content"
+
+        placeholder="Write your piece here..."
+
+    ></textarea>
+
+
+
+
+    <button id="saveBtn">
+
+        Publish
+
+    </button>
+
+
+
+    <p id="status"></p>
+
+
+
+</section>
+
+
+
+
+
+<section class="library">
+
+
+    <h2>
+
+        My Pieces
+
+    </h2>
+
+
+    <div id="pieceList">
+
+
+        Loading...
+
+    </div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+<script type="module" src="admin.js"></script>
+
+
+</body>
+
+</html>
