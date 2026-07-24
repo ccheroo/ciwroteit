@@ -1,0 +1,482 @@
+/* ==========================================
+   CIWROTE
+   tik, salita, at tula.
+========================================== */
+
+:root{
+
+    --bg:#f6f1e8;
+    --paper:#fffdf8;
+    --text:#2d2a26;
+    --accent:#7b5b42;
+    --border:#d9ccb9;
+    --muted:#7b7268;
+
+}
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:'EB Garamond', serif;
+
+    line-height:1.8;
+
+}
+
+
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+
+.navbar{
+
+    width:100%;
+
+    padding:25px 10%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+.logo{
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    font-family:'Special Elite', cursive;
+
+    font-size:1.5rem;
+
+}
+
+
+
+/* ===========================
+   HERO
+=========================== */
+
+
+.hero{
+
+    min-height:80vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px 20px;
+
+}
+
+
+.hero h1{
+
+    font-family:'Special Elite', cursive;
+
+    font-size:4rem;
+
+    margin-bottom:10px;
+
+}
+
+
+.subtitle{
+
+    font-size:1.4rem;
+
+    color:var(--accent);
+
+    margin-bottom:12px;
+
+}
+
+
+.tagline{
+
+    font-style:italic;
+
+    color:var(--muted);
+
+    margin-bottom:45px;
+
+}
+
+
+.scroll{
+
+    font-size:2rem;
+
+    animation:float 2s infinite;
+
+}
+
+
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:translateY(10px);
+
+    }
+
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* ===========================
+   PIECES
+=========================== */
+
+
+.pieces{
+
+    width:90%;
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding-bottom:100px;
+
+}
+
+
+
+/* ===========================
+   PIECE CARD
+=========================== */
+
+
+.piece{
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    padding:35px;
+
+    margin-bottom:35px;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+
+.piece:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+
+.date{
+
+    color:var(--muted);
+
+    font-size:.9rem;
+
+    margin-bottom:10px;
+
+}
+
+
+.piece h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2rem;
+
+    margin-bottom:15px;
+
+}
+
+
+.preview{
+
+    white-space:pre-line;
+
+    color:#444;
+
+}
+
+
+.read-more{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    text-decoration:none;
+
+    color:var(--accent);
+
+    font-weight:bold;
+
+}
+
+
+.read-more:hover{
+
+    text-decoration:underline;
+
+}
+
+
+
+/* ===========================
+   LOADING
+=========================== */
+
+
+.loading{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    padding:100px 20px;
+
+}
+
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+
+footer{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:var(--muted);
+
+    border-top:1px solid var(--border);
+
+}
+
+
+footer small{
+
+    display:block;
+
+    margin-top:8px;
+
+}
+
+
+
+/* ===========================
+   ADMIN ACCESS
+=========================== */
+
+
+.admin-link{
+
+    display:block;
+
+    margin-top:15px;
+
+    font-size:.85rem;
+
+    color:var(--muted);
+
+    text-decoration:none;
+
+    font-style:italic;
+
+    transition:.3s;
+
+}
+
+
+.admin-link:hover{
+
+    color:var(--accent);
+
+    text-decoration:underline;
+
+}
+
+
+
+/* ===========================
+   SINGLE PIECE PAGE
+=========================== */
+
+
+.single-piece{
+
+    width:90%;
+
+    max-width:800px;
+
+    margin:60px auto;
+
+}
+
+
+.single-piece article{
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    padding:50px;
+
+    border-radius:8px;
+
+}
+
+
+.single-piece h1{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:3rem;
+
+    margin-bottom:15px;
+
+}
+
+
+.single-piece .category{
+
+    color:var(--accent);
+
+    margin:20px 0;
+
+    font-style:italic;
+
+}
+
+
+.full-content{
+
+    margin-top:40px;
+
+    white-space:pre-line;
+
+    font-size:1.25rem;
+
+    line-height:2;
+
+}
+
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+
+@media(max-width:768px){
+
+
+    .hero h1{
+
+        font-size:2.8rem;
+
+    }
+
+
+    .subtitle{
+
+        font-size:1.2rem;
+
+    }
+
+
+    .piece{
+
+        padding:25px;
+
+    }
+
+
+    .piece h2{
+
+        font-size:1.7rem;
+
+    }
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+    .single-piece article{
+
+        padding:30px 20px;
+
+    }
+
+
+    .single-piece h1{
+
+        font-size:2.3rem;
+
+    }
+
+
+}
