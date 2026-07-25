@@ -1,7 +1,7 @@
 // ==========================================
 // CIWROTE
 // Homepage Firebase Loader
-// Fireflies Background
+// Floating Leaves Background
 // ==========================================
 
 
@@ -228,6 +228,7 @@ async function loadPieces(){
 
 
 
+
 // ==========================================
 // CLEAN PREVIEW TEXT
 // ==========================================
@@ -270,48 +271,74 @@ function getPreview(text){
 
 
 // ==========================================
-// FIREFLY GENERATOR
+// FLOATING LEAVES GENERATOR
 // ==========================================
 
 
-const fireflyContainer =
-document.querySelector(".fireflies");
+const leafContainer =
+document.querySelector(".leaves");
 
 
 
-if(fireflyContainer){
+if(leafContainer){
 
 
-    for(let i = 0; i < 35; i++){
+    const leafSymbols = [
+
+        "🍂",
+
+        "🍁",
+
+        "❦"
+
+    ];
 
 
-        const firefly =
+
+    for(let i = 0; i < 25; i++){
+
+
+        const leaf =
         document.createElement("span");
 
 
 
-        firefly.className =
-        "firefly";
+        leaf.className =
+        "leaf";
 
 
 
-        firefly.style.left =
+        leaf.innerHTML =
+        leafSymbols[
+            Math.floor(
+                Math.random() * leafSymbols.length
+            )
+        ];
+
+
+
+        leaf.style.left =
         Math.random()*100 + "%";
 
 
 
-        firefly.style.animationDelay =
-        Math.random()*10 + "s";
+        leaf.style.animationDelay =
+        Math.random()*15 + "s";
 
 
 
-        firefly.style.animationDuration =
-        (8 + Math.random()*10) + "s";
+        leaf.style.animationDuration =
+        (12 + Math.random()*12) + "s";
 
 
 
-        fireflyContainer.appendChild(
-            firefly
+        leaf.style.fontSize =
+        (14 + Math.random()*18) + "px";
+
+
+
+        leafContainer.appendChild(
+            leaf
         );
 
 
