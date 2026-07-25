@@ -1,6 +1,6 @@
 /* ==========================================
    CIWROTE
-   tik, salita, at tula.
+   titik, salita, at tula.
 ========================================== */
 
 :root{
@@ -377,7 +377,7 @@ footer small{
 
     background:var(--paper);
 
-    border:1px solid var(--border);
+    border:1px solid(var(--border));
 
     padding:50px;
 
@@ -481,12 +481,14 @@ footer small{
 
 }
 
+
+
 /* ==========================================
-   CIWROTE FIREFLIES BACKGROUND
+   CIWROTE FLOATING LEAVES BACKGROUND
 ========================================== */
 
 
-.fireflies{
+.leaves{
 
     position:fixed;
 
@@ -500,52 +502,50 @@ footer small{
 
     pointer-events:none;
 
-    z-index:-1;
+    z-index:0;
 
 }
 
 
 
-.firefly{
+
+.leaf{
 
     position:absolute;
 
-    width:6px;
+    top:-10%;
 
-    height:6px;
+    opacity:.45;
 
-    background:#f5d77a;
-
-    border-radius:50%;
-
-    opacity:.8;
-
-    box-shadow:
-
-        0 0 8px #f5d77a,
-
-        0 0 20px #f5d77a,
-
-        0 0 30px #f5d77a;
+    filter:blur(.2px);
 
     animation:
 
-        fly 12s infinite ease-in-out;
+        leafFall
+
+        18s
+
+        infinite
+
+        ease-in-out;
 
 }
 
 
 
-@keyframes fly{
+
+@keyframes leafFall{
 
 
     0%{
 
         transform:
 
-        translateY(100vh)
+        translateY(-10vh)
 
-        translateX(0);
+        translateX(0)
+
+        rotate(0deg);
 
         opacity:0;
 
@@ -553,9 +553,9 @@ footer small{
 
 
 
-    20%{
+    15%{
 
-        opacity:1;
+        opacity:.6;
 
     }
 
@@ -565,17 +565,11 @@ footer small{
 
         transform:
 
-        translateY(40vh)
+        translateY(50vh)
 
-        translateX(80px);
+        translateX(80px)
 
-    }
-
-
-
-    80%{
-
-        opacity:1;
+        rotate(180deg);
 
     }
 
@@ -585,13 +579,31 @@ footer small{
 
         transform:
 
-        translateY(-20vh)
+        translateY(120vh)
 
-        translateX(-80px);
+        translateX(-80px)
+
+        rotate(360deg);
 
         opacity:0;
 
     }
 
+
+}
+
+
+
+/* Keep content above leaves */
+
+
+.navbar,
+.hero,
+.pieces,
+footer{
+
+    position:relative;
+
+    z-index:1;
 
 }
