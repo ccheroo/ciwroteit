@@ -1,9 +1,12 @@
 // ==========================================
 // CIWROTE
 // Homepage Firebase Loader
+// Fireflies Background
 // ==========================================
 
+
 import { db } from "./firebase.js";
+
 
 import {
 
@@ -15,34 +18,27 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
+
+
 // ==========================================
 // ELEMENT
 // ==========================================
 
+
 const piecesContainer = document.getElementById("pieces");
 
 
-// ==========================================
-// CHECK ELEMENT
-// ==========================================
-
-if (!piecesContainer) {
-
-    console.error(
-        "Cannot find #pieces element in index.html"
-    );
-
-}
 
 
 // ==========================================
 // LOAD ALL PIECES
 // ==========================================
 
-async function loadPieces() {
+
+async function loadPieces(){
 
 
-    if (!piecesContainer) return;
+    if(!piecesContainer) return;
 
 
 
@@ -58,12 +54,12 @@ async function loadPieces() {
 
 
 
-    try {
+    try{
 
 
         const piecesQuery = query(
 
-            collection(db, "pieces"),
+            collection(db,"pieces"),
 
             orderBy(
                 "createdAt",
@@ -74,23 +70,21 @@ async function loadPieces() {
 
 
 
-        const snapshot = await getDocs(
-            piecesQuery
-        );
+        const snapshot =
+        await getDocs(piecesQuery);
 
 
 
-        piecesContainer.innerHTML = "";
+        piecesContainer.innerHTML="";
 
 
 
-        if (snapshot.empty) {
+        if(snapshot.empty){
 
 
             piecesContainer.innerHTML = `
 
                 <article class="piece">
-
 
                     <h2>
 
@@ -122,7 +116,8 @@ async function loadPieces() {
         snapshot.forEach((doc)=>{
 
 
-            const piece = doc.data();
+            const piece =
+            doc.data();
 
 
 
@@ -131,8 +126,7 @@ async function loadPieces() {
 
 
 
-            article.className =
-            "piece";
+            article.className="piece";
 
 
 
@@ -162,8 +156,11 @@ async function loadPieces() {
                 </p>
 
 
+
                 <a
+
                 href="piece.html?id=${doc.id}"
+
                 class="read-more">
 
                     Read →
@@ -229,9 +226,12 @@ async function loadPieces() {
 }
 
 
+
+
 // ==========================================
-// CREATE PREVIEW
+// CLEAN PREVIEW TEXT
 // ==========================================
+
 
 function getPreview(text){
 
@@ -244,23 +244,89 @@ function getPreview(text){
 
 
 
-    if(text.length <= 200){
+    const cleanText =
+    text.replace(
+        /<[^>]*>/g,
+        ""
+    );
 
-        return text;
+
+
+    if(cleanText.length <= 200){
+
+        return cleanText;
 
     }
 
 
 
-    return text.substring(0,200) + "...";
+    return cleanText.substring(0,200) + "...";
 
 
 }
 
 
 
+
+
+// ==========================================
+// FIREFLY GENERATOR
+// ==========================================
+
+
+const fireflyContainer =
+document.querySelector(".fireflies");
+
+
+
+if(fireflyContainer){
+
+
+    for(let i = 0; i < 35; i++){
+
+
+        const firefly =
+        document.createElement("span");
+
+
+
+        firefly.className =
+        "firefly";
+
+
+
+        firefly.style.left =
+        Math.random()*100 + "%";
+
+
+
+        firefly.style.animationDelay =
+        Math.random()*10 + "s";
+
+
+
+        firefly.style.animationDuration =
+        (8 + Math.random()*10) + "s";
+
+
+
+        fireflyContainer.appendChild(
+            firefly
+        );
+
+
+    }
+
+
+}
+
+
+
+
+
 // ==========================================
 // START
 // ==========================================
+
 
 loadPieces();
