@@ -211,16 +211,124 @@ textarea{
 
 
 
-textarea{
+/* ==========================
+   RICH TEXT EDITOR
+========================== */
 
-    min-height:300px;
 
-    resize:vertical;
+.toolbar{
 
-    line-height:1.7;
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:15px;
 
 }
 
+
+
+.toolbar button{
+
+    width:45px;
+
+    height:40px;
+
+    padding:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1.2rem;
+
+    background:var(--paper);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+}
+
+
+
+.toolbar button:hover{
+
+    background:var(--accent);
+
+    color:white;
+
+}
+
+
+
+.editor-area{
+
+    width:100%;
+
+    min-height:300px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    border:1px solid var(--border);
+
+    border-radius:5px;
+
+    background:#fff;
+
+    font-family:'EB Garamond', serif;
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+    color:var(--text);
+
+    outline:none;
+
+    overflow-y:auto;
+
+}
+
+
+
+.editor-area:focus{
+
+    border-color:var(--accent);
+
+}
+
+
+
+.editor-area:empty:before{
+
+    content:attr(data-placeholder);
+
+    color:#aaa;
+
+    font-style:italic;
+
+}
+
+
+
+.editor-area i{
+
+    font-style:italic;
+
+}
+
+
+
+.editor-area b{
+
+    font-weight:bold;
+
+}
 
 
 input:focus,
