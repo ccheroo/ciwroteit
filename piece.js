@@ -1,6 +1,7 @@
 // ==========================================
 // CIWROTE
 // Single Piece Reader
+// Music Support Version
 // ==========================================
 
 
@@ -17,11 +18,17 @@ import {
 
 
 
+
+
 // ==========================================
 // ELEMENT
 // ==========================================
 
-const pieceContainer = document.getElementById("piece");
+
+const pieceContainer =
+document.getElementById("piece");
+
+
 
 
 
@@ -29,18 +36,25 @@ const pieceContainer = document.getElementById("piece");
 // GET PIECE ID
 // ==========================================
 
-const params = new URLSearchParams(
+
+const params =
+new URLSearchParams(
     window.location.search
 );
 
 
-const pieceId = params.get("id");
+
+const pieceId =
+params.get("id");
+
+
 
 
 
 // ==========================================
 // LOAD PIECE
 // ==========================================
+
 
 async function loadPiece(){
 
@@ -60,10 +74,12 @@ async function loadPiece(){
 
 
 
+
     try{
 
 
-        const pieceRef = doc(
+        const pieceRef =
+        doc(
 
             db,
 
@@ -75,7 +91,11 @@ async function loadPiece(){
 
 
 
-        const snapshot = await getDoc(pieceRef);
+
+        const snapshot =
+        await getDoc(pieceRef);
+
+
 
 
 
@@ -94,7 +114,11 @@ async function loadPiece(){
 
 
 
-        const piece = snapshot.data();
+
+
+        const piece =
+        snapshot.data();
+
 
 
 
@@ -102,7 +126,9 @@ async function loadPiece(){
 
 
 
+
     }
+
 
 
 
@@ -120,6 +146,7 @@ async function loadPiece(){
         );
 
 
+
     }
 
 
@@ -127,14 +154,61 @@ async function loadPiece(){
 
 
 
+
+
+
 // ==========================================
 // DISPLAY
 // ==========================================
 
+
 function displayPiece(piece){
 
 
+
+    let musicSection = "";
+
+
+
+    if(piece.songLink){
+
+
+
+        musicSection = `
+
+
+            <div class="music-player">
+
+
+                <p class="music-title">
+
+                    🎵 ${piece.songTitle || "Listen while reading"}
+
+                </p>
+
+
+
+                ${createMusicEmbed(piece.songLink)}
+
+
+
+            </div>
+
+
+
+        `;
+
+
+    }
+
+
+
+
+
+
+
     pieceContainer.innerHTML = `
+
 
 
         <p class="date">
@@ -142,6 +216,8 @@ function displayPiece(piece){
             ${piece.date || ""}
 
         </p>
+
+
 
 
 
@@ -153,6 +229,8 @@ function displayPiece(piece){
 
 
 
+
+
         <p class="category">
 
             ${piece.category || ""}
@@ -161,26 +239,235 @@ function displayPiece(piece){
 
 
 
+
+
+        ${musicSection}
+
+
+
+
+
+
         <div class="full-content">
+
 
             ${piece.content || "No content available."}
 
+
         </div>
+
+
 
 
     `;
 
 
+
 }
+
+
+
+
+
+
+
+// ==========================================
+// CREATE MUSIC PLAYER
+// ==========================================
+
+
+function createMusicEmbed(link){
+
+
+
+    if(link.includes("spotify.com")){
+
+
+        return `
+
+
+            <iframe
+
+                style="border-radius:12px"
+
+                src="https://open.spotify.com/embed/track/${getSpotifyID(link)}"
+
+                width="100%"
+
+                height="80"
+
+                frameBorder="0"
+
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+
+            </iframe>
+
+
+        `;
+
+
+    }
+
+
+
+
+
+
+
+    if(link.includes("youtube.com") || link.includes("youtu.be")){
+
+
+        const videoID =
+        getYoutubeID(link);
+
+
+
+
+        return `
+
+
+            <iframe
+
+                width="100%"
+
+                height="200"
+
+                src="https://www.youtube.com/embed/${videoID}"
+
+                title="YouTube music"
+
+                frameborder="0"
+
+                allow="autoplay; encrypted-media"
+
+                allowfullscreen>
+
+            </iframe>
+
+
+
+        `;
+
+
+    }
+
+
+
+
+
+
+    return `
+
+
+        <a
+
+        href="${link}"
+
+        target="_blank"
+
+        class="music-link">
+
+
+            Open song 🎧
+
+
+        </a>
+
+
+
+    `;
+
+
+
+}
+
+
+
+
+
+
+
+// ==========================================
+// GET SPOTIFY ID
+// ==========================================
+
+
+function getSpotifyID(url){
+
+
+    const parts =
+    url.split("/track/");
+
+
+
+    if(parts.length > 1){
+
+
+        return parts[1].split("?")[0];
+
+
+    }
+
+
+
+    return "";
+
+}
+
+
+
+
+
+
+
+// ==========================================
+// GET YOUTUBE ID
+// ==========================================
+
+
+function getYoutubeID(url){
+
+
+
+    if(url.includes("youtu.be")){
+
+
+        return url.split("/").pop();
+
+
+    }
+
+
+
+
+    const params =
+    new URL(url).searchParams;
+
+
+
+    return params.get("v");
+
+
+
+}
+
+
+
+
+
+
+
 // ==========================================
 // ERROR
 // ==========================================
+
 
 function showError(message){
 
 
 
     pieceContainer.innerHTML = `
+
 
 
         <h1>
@@ -190,6 +477,8 @@ function showError(message){
         </h1>
 
 
+
+
         <p>
 
             ${message}
@@ -197,15 +486,22 @@ function showError(message){
         </p>
 
 
+
     `;
+
 
 
 }
 
 
 
+
+
+
+
 // ==========================================
 // START
 // ==========================================
+
 
 loadPiece();
