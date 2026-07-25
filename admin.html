@@ -117,14 +117,49 @@
 
 
 
+    <!-- TEXT EDITOR TOOLBAR -->
 
-    <textarea
+    <div class="toolbar">
+
+
+        <button 
+            type="button"
+            id="boldBtn">
+
+            <b>B</b>
+
+        </button>
+
+
+
+        <button 
+            type="button"
+            id="italicBtn">
+
+            <i>I</i>
+
+        </button>
+
+
+    </div>
+
+
+
+
+    <!-- WRITING AREA -->
+
+    <div
 
         id="content"
 
-        placeholder="Write your piece here..."
+        class="editor-area"
 
-    ></textarea>
+        contenteditable="true"
+
+        data-placeholder="Write your piece here..."
+
+    ></div>
+
 
 
 
