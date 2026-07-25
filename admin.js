@@ -1,7 +1,7 @@
 // ==========================================
 // CIWROTE
 // Admin Writing Desk
-// Rich Text Editor Version
+// Rich Text Editor + Optional Music Version
 // ==========================================
 
 
@@ -40,23 +40,49 @@ import {
 // ==========================================
 
 
-const titleInput = document.getElementById("title");
+const titleInput =
+document.getElementById("title");
 
-const categoryInput = document.getElementById("category");
 
-const contentInput = document.getElementById("content");
+const categoryInput =
+document.getElementById("category");
 
-const saveBtn = document.getElementById("saveBtn");
 
-const pieceList = document.getElementById("pieceList");
+const contentInput =
+document.getElementById("content");
 
-const status = document.getElementById("status");
 
-const logoutBtn = document.getElementById("logoutBtn");
+const songTitleInput =
+document.getElementById("songTitle");
 
-const boldBtn = document.getElementById("boldBtn");
 
-const italicBtn = document.getElementById("italicBtn");
+const songLinkInput =
+document.getElementById("songLink");
+
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+
+const pieceList =
+document.getElementById("pieceList");
+
+
+const status =
+document.getElementById("status");
+
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+
+const boldBtn =
+document.getElementById("boldBtn");
+
+
+const italicBtn =
+document.getElementById("italicBtn");
+
 
 
 
@@ -66,6 +92,7 @@ const italicBtn = document.getElementById("italicBtn");
 
 
 let editingId = null;
+
 
 
 
@@ -103,6 +130,7 @@ italicBtn.addEventListener("click",()=>{
 
 
 });
+
 
 
 
@@ -178,6 +206,18 @@ saveBtn.addEventListener("click",async()=>{
 
 
 
+    const songTitle =
+    songTitleInput.value.trim();
+
+
+
+    const songLink =
+    songLinkInput.value.trim();
+
+
+
+
+
 
     if(!title || !content){
 
@@ -194,6 +234,7 @@ saveBtn.addEventListener("click",async()=>{
 
 
 
+
     saveBtn.disabled=true;
 
     saveBtn.textContent="Saving...";
@@ -201,10 +242,13 @@ saveBtn.addEventListener("click",async()=>{
 
 
 
+
     try{
 
 
+
         if(editingId){
+
 
 
             await updateDoc(
@@ -223,6 +267,10 @@ saveBtn.addEventListener("click",async()=>{
 
                     content,
 
+                    songTitle,
+
+                    songLink,
+
                     updatedAt:
                     serverTimestamp()
 
@@ -236,10 +284,13 @@ saveBtn.addEventListener("click",async()=>{
             "Piece updated.";
 
 
+
         }
 
 
+
         else{
+
 
 
             await addDoc(
@@ -258,6 +309,11 @@ saveBtn.addEventListener("click",async()=>{
 
                     content,
 
+                    songTitle,
+
+                    songLink,
+
+
 
                     date:
                     new Date().toLocaleDateString(
@@ -274,12 +330,15 @@ saveBtn.addEventListener("click",async()=>{
                     ),
 
 
+
                     createdAt:
                     serverTimestamp(),
 
 
+
                     updatedAt:
                     serverTimestamp()
+
 
 
                 }
@@ -292,7 +351,9 @@ saveBtn.addEventListener("click",async()=>{
             "Piece published.";
 
 
+
         }
+
 
 
 
@@ -302,7 +363,9 @@ saveBtn.addEventListener("click",async()=>{
         loadPieces();
 
 
+
     }
+
 
 
 
@@ -320,6 +383,7 @@ saveBtn.addEventListener("click",async()=>{
 
 
 
+
     finally{
 
 
@@ -332,7 +396,9 @@ saveBtn.addEventListener("click",async()=>{
 
 
 
+
 });
+
 
 
 
@@ -354,6 +420,7 @@ async function loadPieces(){
     try{
 
 
+
         const q=query(
 
             collection(
@@ -361,10 +428,12 @@ async function loadPieces(){
                 "pieces"
             ),
 
+
             orderBy(
                 "createdAt",
                 "desc"
             )
+
 
         );
 
@@ -375,7 +444,9 @@ async function loadPieces(){
 
 
 
+
         pieceList.innerHTML="";
+
 
 
 
@@ -394,11 +465,13 @@ async function loadPieces(){
 
 
 
+
         snapshot.forEach((document)=>{
 
 
             const piece =
             document.data();
+
 
 
 
@@ -415,11 +488,35 @@ async function loadPieces(){
                     </h3>
 
 
+
                     <small>
 
                         ${piece.category || ""}
 
                     </small>
+
+
+
+
+                    ${
+                        piece.songTitle
+
+                        ?
+
+                        `<p>
+
+                            🎵 ${piece.songTitle}
+
+                        </p>`
+
+                        :
+
+                        ""
+
+                    }
+
+
+
 
 
                     <div class="actions">
@@ -437,6 +534,7 @@ async function loadPieces(){
 
 
 
+
                         <button
 
                         class="delete-btn"
@@ -448,7 +546,9 @@ async function loadPieces(){
                         </button>
 
 
+
                     </div>
+
 
 
                 </article>
@@ -457,7 +557,9 @@ async function loadPieces(){
             `;
 
 
+
         });
+
 
 
 
@@ -465,24 +567,32 @@ async function loadPieces(){
 
 
 
+
     }
+
 
 
 
     catch(error){
 
 
+
         console.error(error);
+
 
 
         pieceList.innerHTML =
         "Unable to load pieces.";
 
 
+
     }
 
 
+
 }
+
+
 
 
 
@@ -505,9 +615,11 @@ function attachButtons(){
             "click",
             ()=>{
 
+
                 editPiece(
                     button.dataset.id
                 );
+
 
             }
 
@@ -515,6 +627,7 @@ function attachButtons(){
 
 
     });
+
 
 
 
@@ -527,9 +640,11 @@ function attachButtons(){
             "click",
             ()=>{
 
+
                 deletePiece(
                     button.dataset.id
                 );
+
 
             }
 
@@ -541,6 +656,8 @@ function attachButtons(){
 
 
 }
+
+
 
 
 
@@ -568,6 +685,7 @@ async function editPiece(id){
 
 
 
+
     if(snap.exists()){
 
 
@@ -577,18 +695,37 @@ async function editPiece(id){
 
 
 
+
         titleInput.value =
-        piece.title;
+        piece.title || "";
+
 
 
 
         categoryInput.value =
-        piece.category;
+        piece.category || "";
+
 
 
 
         contentInput.innerHTML =
-        piece.content;
+        piece.content || "";
+
+
+
+
+
+        songTitleInput.value =
+        piece.songTitle || "";
+
+
+
+
+
+        songLinkInput.value =
+        piece.songLink || "";
+
+
 
 
 
@@ -596,8 +733,10 @@ async function editPiece(id){
 
 
 
+
         saveBtn.textContent =
         "Update";
+
 
 
 
@@ -610,10 +749,15 @@ async function editPiece(id){
         });
 
 
+
+
     }
 
 
+
 }
+
+
 
 
 
@@ -644,6 +788,7 @@ async function deletePiece(id){
 
 
 
+
     await deleteDoc(
 
         doc(
@@ -656,11 +801,15 @@ async function deletePiece(id){
 
 
 
+
     loadPieces();
 
 
 
+
 }
+
+
 
 
 
@@ -682,6 +831,13 @@ function clearForm(){
 
 
     contentInput.innerHTML="";
+
+
+    songTitleInput.value="";
+
+
+    songLinkInput.value="";
+
 
 
     editingId=null;
