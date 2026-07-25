@@ -1,9 +1,12 @@
 // ==========================================
 // CIWROTE
 // Admin Writing Desk
+// Rich Text Editor Version
 // ==========================================
 
+
 import { db, auth } from "./firebase.js";
+
 
 import {
 
@@ -21,6 +24,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 
+
 import {
 
     onAuthStateChanged,
@@ -30,9 +34,11 @@ import {
 
 
 
+
 // ==========================================
 // ELEMENTS
 // ==========================================
+
 
 const titleInput = document.getElementById("title");
 
@@ -48,13 +54,56 @@ const status = document.getElementById("status");
 
 const logoutBtn = document.getElementById("logoutBtn");
 
+const boldBtn = document.getElementById("boldBtn");
+
+const italicBtn = document.getElementById("italicBtn");
+
 
 
 // ==========================================
 // VARIABLES
 // ==========================================
 
+
 let editingId = null;
+
+
+
+
+// ==========================================
+// TEXT EDITOR BUTTONS
+// ==========================================
+
+
+boldBtn.addEventListener("click",()=>{
+
+
+    document.execCommand(
+        "bold"
+    );
+
+
+    contentInput.focus();
+
+
+});
+
+
+
+
+italicBtn.addEventListener("click",()=>{
+
+
+    document.execCommand(
+        "italic"
+    );
+
+
+    contentInput.focus();
+
+
+});
+
 
 
 
@@ -62,14 +111,17 @@ let editingId = null;
 // AUTH CHECK
 // ==========================================
 
-onAuthStateChanged(auth, (user)=>{
+
+onAuthStateChanged(auth,(user)=>{
 
 
     if(!user){
 
+
         window.location.href="login.html";
 
         return;
+
 
     }
 
@@ -81,11 +133,14 @@ onAuthStateChanged(auth, (user)=>{
 
 
 
+
+
 // ==========================================
 // LOGOUT
 // ==========================================
 
-logoutBtn.addEventListener("click", async()=>{
+
+logoutBtn.addEventListener("click",async()=>{
 
 
     await signOut(auth);
@@ -98,18 +153,29 @@ logoutBtn.addEventListener("click", async()=>{
 
 
 
+
+
 // ==========================================
 // SAVE PIECE
 // ==========================================
 
-saveBtn.addEventListener("click", async()=>{
+
+saveBtn.addEventListener("click",async()=>{
 
 
-    const title = titleInput.value.trim();
+    const title =
+    titleInput.value.trim();
 
-    const category = categoryInput.value;
 
-    const content = contentInput.value.trim();
+
+    const category =
+    categoryInput.value;
+
+
+
+    const content =
+    contentInput.innerHTML.trim();
+
 
 
 
@@ -122,13 +188,16 @@ saveBtn.addEventListener("click", async()=>{
 
         return;
 
+
     }
+
 
 
 
     saveBtn.disabled=true;
 
     saveBtn.textContent="Saving...";
+
 
 
 
@@ -140,7 +209,11 @@ saveBtn.addEventListener("click", async()=>{
 
             await updateDoc(
 
-                doc(db,"pieces",editingId),
+                doc(
+                    db,
+                    "pieces",
+                    editingId
+                ),
 
                 {
 
@@ -150,11 +223,13 @@ saveBtn.addEventListener("click", async()=>{
 
                     content,
 
-                    updatedAt:serverTimestamp()
+                    updatedAt:
+                    serverTimestamp()
 
                 }
 
             );
+
 
 
             status.textContent =
@@ -169,7 +244,10 @@ saveBtn.addEventListener("click", async()=>{
 
             await addDoc(
 
-                collection(db,"pieces"),
+                collection(
+                    db,
+                    "pieces"
+                ),
 
                 {
 
@@ -180,24 +258,34 @@ saveBtn.addEventListener("click", async()=>{
 
                     content,
 
-                    date:new Date().toLocaleDateString(
+
+                    date:
+                    new Date().toLocaleDateString(
                         "en-US",
                         {
+
                             year:"numeric",
+
                             month:"long",
+
                             day:"numeric"
+
                         }
                     ),
 
 
-                    createdAt:serverTimestamp(),
+                    createdAt:
+                    serverTimestamp(),
 
-                    updatedAt:serverTimestamp()
+
+                    updatedAt:
+                    serverTimestamp()
 
 
                 }
 
             );
+
 
 
             status.textContent =
@@ -208,13 +296,14 @@ saveBtn.addEventListener("click", async()=>{
 
 
 
+
         clearForm();
 
         loadPieces();
 
 
-
     }
+
 
 
     catch(error){
@@ -247,14 +336,18 @@ saveBtn.addEventListener("click", async()=>{
 
 
 
+
+
 // ==========================================
 // LOAD PIECES
 // ==========================================
 
+
 async function loadPieces(){
 
 
-    pieceList.innerHTML="Loading...";
+    pieceList.innerHTML =
+    "Loading...";
 
 
 
@@ -263,15 +356,22 @@ async function loadPieces(){
 
         const q=query(
 
-            collection(db,"pieces"),
+            collection(
+                db,
+                "pieces"
+            ),
 
-            orderBy("createdAt","desc")
+            orderBy(
+                "createdAt",
+                "desc"
+            )
 
         );
 
 
 
-        const snapshot=await getDocs(q);
+        const snapshot =
+        await getDocs(q);
 
 
 
@@ -282,8 +382,7 @@ async function loadPieces(){
         if(snapshot.empty){
 
 
-            pieceList.innerHTML=
-
+            pieceList.innerHTML =
             "<p>No pieces yet.</p>";
 
 
@@ -294,14 +393,17 @@ async function loadPieces(){
 
 
 
+
         snapshot.forEach((document)=>{
 
 
-            const piece=document.data();
+            const piece =
+            document.data();
 
 
 
             pieceList.innerHTML += `
+
 
                 <article class="admin-piece">
 
@@ -324,7 +426,9 @@ async function loadPieces(){
 
 
                         <button
+
                         class="edit-btn"
+
                         data-id="${document.id}">
 
                             Edit
@@ -334,7 +438,9 @@ async function loadPieces(){
 
 
                         <button
+
                         class="delete-btn"
+
                         data-id="${document.id}">
 
                             Delete
@@ -346,6 +452,7 @@ async function loadPieces(){
 
 
                 </article>
+
 
             `;
 
@@ -359,6 +466,7 @@ async function loadPieces(){
 
 
     }
+
 
 
     catch(error){
@@ -378,25 +486,36 @@ async function loadPieces(){
 
 
 
+
+
 // ==========================================
 // BUTTON EVENTS
 // ==========================================
 
+
 function attachButtons(){
+
 
 
     document.querySelectorAll(".edit-btn")
     .forEach(button=>{
 
 
-        button.addEventListener("click",()=>{
+        button.addEventListener(
+            "click",
+            ()=>{
 
-            editPiece(button.dataset.id);
+                editPiece(
+                    button.dataset.id
+                );
 
-        });
+            }
+
+        );
 
 
     });
+
 
 
 
@@ -404,17 +523,26 @@ function attachButtons(){
     .forEach(button=>{
 
 
-        button.addEventListener("click",()=>{
+        button.addEventListener(
+            "click",
+            ()=>{
 
-            deletePiece(button.dataset.id);
+                deletePiece(
+                    button.dataset.id
+                );
 
-        });
+            }
+
+        );
 
 
     });
 
 
+
 }
+
+
 
 
 
@@ -422,12 +550,19 @@ function attachButtons(){
 // EDIT
 // ==========================================
 
+
 async function editPiece(id){
 
 
-    const snap = await getDoc(
 
-        doc(db,"pieces",id)
+    const snap =
+    await getDoc(
+
+        doc(
+            db,
+            "pieces",
+            id
+        )
 
     );
 
@@ -436,22 +571,34 @@ async function editPiece(id){
     if(snap.exists()){
 
 
-        const piece=snap.data();
+
+        const piece =
+        snap.data();
 
 
 
-        titleInput.value=piece.title;
+        titleInput.value =
+        piece.title;
 
-        categoryInput.value=piece.category;
 
-        contentInput.value=piece.content;
+
+        categoryInput.value =
+        piece.category;
+
+
+
+        contentInput.innerHTML =
+        piece.content;
 
 
 
         editingId=id;
 
 
-        saveBtn.textContent="Update";
+
+        saveBtn.textContent =
+        "Update";
+
 
 
         window.scrollTo({
@@ -470,17 +617,22 @@ async function editPiece(id){
 
 
 
+
+
 // ==========================================
 // DELETE
 // ==========================================
 
+
 async function deletePiece(id){
+
 
 
     const confirmDelete =
     confirm(
         "Delete this piece permanently?"
     );
+
 
 
     if(!confirmDelete){
@@ -491,9 +643,14 @@ async function deletePiece(id){
 
 
 
+
     await deleteDoc(
 
-        doc(db,"pieces",id)
+        doc(
+            db,
+            "pieces",
+            id
+        )
 
     );
 
@@ -502,7 +659,10 @@ async function deletePiece(id){
     loadPieces();
 
 
+
 }
+
+
 
 
 
@@ -510,17 +670,22 @@ async function deletePiece(id){
 // CLEAR FORM
 // ==========================================
 
+
 function clearForm(){
+
 
 
     titleInput.value="";
 
+
     categoryInput.value="";
 
-    contentInput.value="";
+
+    contentInput.innerHTML="";
 
 
     editingId=null;
+
 
 
 }
