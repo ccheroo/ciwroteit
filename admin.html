@@ -9,11 +9,14 @@
 
     <title>ciwrote | Writing Desk</title>
 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
+
 
     <link rel="stylesheet" href="admin.css">
 
@@ -21,6 +24,7 @@
 
 
 <body>
+
 
 
 <header class="admin-header">
@@ -34,13 +38,16 @@
 
         </h1>
 
+
         <p>
 
             Writing Desk
 
         </p>
 
+
     </div>
+
 
 
     <button id="logoutBtn">
@@ -54,11 +61,18 @@
 
 
 
+
+
+
 <main class="admin-container">
 
 
 
+
+
 <section class="editor">
+
+
 
 
 
@@ -67,6 +81,8 @@
         Write a Piece
 
     </h2>
+
+
 
 
 
@@ -79,6 +95,9 @@
         placeholder="Title of your piece"
 
     >
+
+
+
 
 
 
@@ -117,28 +136,79 @@
 
 
 
+
+
+
+
+    <!-- OPTIONAL MUSIC -->
+
+    <input
+
+        type="text"
+
+        id="songTitle"
+
+        placeholder="Song title (optional)"
+
+    >
+
+
+
+
+    <input
+
+        type="url"
+
+        id="songLink"
+
+        placeholder="Spotify / YouTube link (optional)"
+
+    >
+
+
+
+
+
+
+
+
     <!-- TEXT EDITOR TOOLBAR -->
+
 
     <div class="toolbar">
 
 
-        <button 
+
+        <button
+
             type="button"
+
             id="boldBtn">
+
 
             <b>B</b>
 
+
         </button>
 
 
 
-        <button 
+
+
+
+        <button
+
             type="button"
+
             id="italicBtn">
+
 
             <i>I</i>
 
+
         </button>
+
+
 
 
     </div>
@@ -146,17 +216,27 @@
 
 
 
+
+
+
+
     <!-- WRITING AREA -->
+
 
     <div
 
+
         id="content"
+
 
         class="editor-area"
 
+
         contenteditable="true"
 
+
         data-placeholder="Write your piece here..."
+
 
     ></div>
 
@@ -164,15 +244,26 @@
 
 
 
+
+
+
+
     <button id="saveBtn">
 
+
         Publish
+
 
     </button>
 
 
 
+
+
+
     <p id="status"></p>
+
+
 
 
 
@@ -182,7 +273,12 @@
 
 
 
+
+
+
+
 <section class="library">
+
 
 
     <h2>
@@ -192,15 +288,25 @@
     </h2>
 
 
+
+
     <div id="pieceList">
 
 
         Loading...
 
+
     </div>
 
 
+
+
+
 </section>
+
+
+
+
 
 
 
@@ -209,7 +315,13 @@
 
 
 
+
+
+
+
+
 <script type="module" src="admin.js"></script>
+
 
 
 </body>
