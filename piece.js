@@ -134,7 +134,6 @@ async function loadPiece(){
 function displayPiece(piece){
 
 
-
     pieceContainer.innerHTML = `
 
 
@@ -164,7 +163,7 @@ function displayPiece(piece){
 
         <div class="full-content">
 
-            ${piece.content || ""}
+            ${piece.content || "No content available."}
 
         </div>
 
@@ -173,9 +172,6 @@ function displayPiece(piece){
 
 
 }
-
-
-
 // ==========================================
 // ERROR
 // ==========================================
